@@ -1,0 +1,88 @@
+<div class="container">
+  <form action="/admin/message/create" method="post" id="createMessage" class="needs-validation">
+    <div class="mb-3">
+      <label for="type" class="form-label is-required d-block"><%=translate("message.type")%></label>
+      <div class="btn-group" role="group">
+        <%@types.each do |type|%>
+          <input type="radio" class="btn-check" name="type" id="<%=type%>" autocomplete="off" value="<%=type%>" checked>
+          <label class="btn btn-secondary" for="<%=type%>"><%=type.capitalize%></label>
+        <%end%>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="global" class="form-check-label is-required"><%=translate("message.global")%></label>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="global" name="global">
+      </div>
+    </div>
+    <div id="container-users" class="mb-3">
+      <label for="users" class="form-label is-required"><%=translate("message.users")%></label>
+      <input id="users" class="form-control" type="text" name="users" placeholder="<%=translate("message.users")%>" onclick='test()'/>
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label is-required"><%=translate("message.title")%></label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label is-required"><%=translate("message.content")%></label>
+      <textarea class="form-control" id="content" name="content"></textarea>
+    </div>
+    <div class="mb-3 text-end">
+      <button type="submit" class="btn btn-primary"><%=translate("form.save")%></button>
+    </div>
+  </form>
+</div>
+
+<script>
+  var simplemde = new SimpleMDE();
+  $().ready(function(){
+
+  document.querySelector("#global").onchange = (e) => {
+    let checked = e.target.checked;
+    if (checked) {
+      document.querySelector("#container-users").classList.add('d-none');
+      } else {
+        document.querySelector("#container-users").classList.remove('d-none');
+    }
+  }
+
+  //Suggestions for users
+  users = <%=@users.to_json%>
+  suggestions = []
+  users.forEach(user => {
+    suggestions.push({tag: `${user.username} - ${user.fullname}`, value: `${user.username}` })
+  });
+  $('input[name="users"]').amsifySuggestags({
+    suggestions: suggestions
+  });
+
+
+  $('#createMessage').validate({
+    ignore: "",
+    rules: {
+      title:  {
+                  required: true,
+                  minlength: 3,
+                  maxlength: 15
+                },
+      content: {
+                  required: true,
+                  minlength: 3,
+                  maxlength: 500
+                }
+    },
+    messages: {
+      title: {
+          required: "<%=translate('form.admin.enter_title')%>",
+          minlength: "<%=translate('form.admin.title_min_characters')%>",
+          maxlength: "<%=translate('form.admin.title_max_characters')%>"
+      },
+      content: {
+          required: "<%=translate('form.admin.enter_content')%>",
+          minlength: "<%=translate('form.admin.content_min_characters')%>",
+          maxlength: "<%=translate('form.admin.content_max_characters')%>"
+      }
+    }
+  });
+    });
+</script>

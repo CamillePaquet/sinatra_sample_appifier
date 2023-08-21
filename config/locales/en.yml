@@ -1,0 +1,86 @@
+en:
+  default:
+    home: Home
+    page_not_found: Page not found.
+    error_system: An error has occurred, please try again later.
+    environment: Environment
+    current_version: Current version
+    close: Close
+    irreversible_action: This action is irreversible.
+  menu:
+    labels:
+      home: Home
+      list_users: Users list
+      create_user: Create user
+      create_message: Create message
+  form:
+    edit: Edit
+    save: Save
+    actions: Actions
+    cancel: Cancel
+    user:
+      enter_password: Please enter a password
+      password_min_characters: The password must be at least 8 characters.
+      enter_password_confirmation: Please enter your confirmation password.
+      invalid_password_confirmation: The confirmation password is invalid.
+    admin:
+      enter_fullname: Enter a fullname.
+      enter_username: Enter a username.
+      enter_email: Enter an email.
+      enter_password: Enter a password.
+      enter_profile: Enter user profiles.
+      enter_token: Enter user token.
+      enter_title: Enter message title.
+      enter_content: Enter message content.
+      fullname_min_characters: The fullname must be at least 2 characters.
+      fullname_max_characters: The fullname must be less than 15 characters.
+      username_min_characters: The username must be at least 2 characters.
+      username_max_characters: The username must be less than 15 characters.
+      title_min_characters: The title must be at least 3 characters.
+      title_max_characters: The title must be less than 15 characters.
+      content_min_characters: The content must be at least 3 characters.
+      content_max_characters: The content must be less than 500 characters.
+      email_min_characters: The email must be at least 10 characters.
+      email_max_characters: The email must be less than 30 characters.
+      password_min_characters: The password must be at least 6 characters.
+      password_max_characters: The password must be less than 20 characters.
+      token_min_characters: The token must be less than 15 characters.
+      user_deletion: User deletation
+      want_to_delete_user: Do you want to delete the user?
+  navigation:
+    deconnexion: Logout
+    user_list: Users list
+    create_user: Create user
+    update_user: Update user
+    home: Home
+    connection: Login
+    edit_profil: Edit my profil
+  user:
+    password: Password
+    password_confirmation: Confirm password
+    update_password: Edit your password
+    username: Username
+    fullname: Fullname
+    email: Email
+    additional_profiles: Additional profiles
+    profiles: Profiles
+    token: Token
+    api_user: API User
+    empty_password: Password empty
+    new_token_registered: New token registred
+    need_registration: You must be registered
+    bad_profil: You don't have the corresponding profile
+    bad_credentials: Bad username or password
+    edit_profile: Modifier mon profil
+    api: API
+  message:
+    type: Type
+    title: Title
+    content: Content
+    global: Global
+    users: Users
+    new_informations: New informations
+    alerts: Warnings
+    check_to_delete: Check boxes to delete items
+    ok: Ok
+    delete: Delete

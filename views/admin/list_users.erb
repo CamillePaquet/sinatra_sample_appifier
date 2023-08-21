@@ -1,0 +1,42 @@
+<div class="container">
+  <table class="table align-middle" id="table-user">
+    <thead>
+      <tr>
+        <th scope="col"><%=translate("user.fullname")%></th>
+        <th class="text-center" scope="col"><%=translate("user.username")%></th>
+        <th class="text-center" scope="col"><%=translate("user.email")%></th>
+        <th class="text-center" scope="col"><%=translate("user.api")%></th>
+        <th class="text-center" scope="col"><%=translate("user.profiles")%></th>
+        <th class="text-center" scope="col" class="text-center"><%=translate("form.actions")%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="border-bottom-0">
+          <td>
+            <%=user.fullname%>
+          </td>
+          <td class="text-center">
+            <%=user.username%>
+          </td>
+          <td class="text-center">
+            <%=user.email%>
+          </td>
+          <td class="text-center">
+            <% if user.api_user %> <i class="far fa-check-square fa-lg"></i> <%else%>  <i class="far fa-square fa-lg"></i> <%end%>
+          </td>
+          <td class="text-center">
+            <%user.profiles.each do |profil|%>
+              <span class="badge rounded-pill bg-success"><%=profil%></span>
+            <%end%>
+          </td>
+          <td class="text-center">
+            <a href="/admin/user/update/<%=user.id.to_s%>" class="btn btn-warning mx-1" role="button" aria-disabled="false"><i class="fas fa-pencil-alt me-2"></i><%=translate("form.edit")%></a>
+            <button id="delete-user-button" type="button" class="deleteUser btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteUser<%=user.id%>" value="<%=user.id.to_s%>"><i class="fas fa-trash-alt"></i></button>
+          </td>
+          <%= erb :"/partials/_modal_confirmation_delete_user", :format => :html,  locals:  {user: user} %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,52 @@
+version: '3.7'
+
+
+networks:
+  application:
+  
+services:
+  app:
+    image: app:latest
+    networks:
+     - application
+    volumes:
+      - ./docker/settings.yml:/opt/application/config/settings.yml
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app.entrypoints=web
+      - traefik.http.routers.app.rule=Host(`application.localhost`)
+      - traefik.http.services.app.loadbalancer.server.port=4567
+
+  traefik:
+    image: traefik:latest
+    command:
+      - --api.insecure=true
+      - --api.dashboard=true 
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=monitoring
+      - --entrypoints.web.address=:80
+      - --metrics.prometheus=true
+    ports:
+      - "80:80"
+    networks:
+      - application
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels: 
+    - traefik.enable=true
+    - traefik.http.routers.traefik.entrypoints=web
+    - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
+    - traefik.http.services.traefik.loadbalancer.server.port=8080
+    - traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$xHiocTzm$$1srppVVHyZzMZExDJ7qhH/
+    - traefik.http.routers.traefik.middlewares=traefik-auth
+    
+  redis:
+    image: redis:latest
+    networks:
+      - application
+
+  mongodb:
+    image: mongo:latest
+    networks:
+      - application

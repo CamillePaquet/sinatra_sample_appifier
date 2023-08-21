@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="uft-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="%%APP_DESCRIPTION%%">
+    <meta name="author" content="%%AUTHOR_NAME%%">
+    <meta name="generator" content="%%GENERATO_NAME%%">
+    <title>Application</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="img/favicons/favicon.ico">
+
+    <%= erb :"partials/_include", :format => :html %>
+  </head>
+
+  <body class="p-0">
+    <main class="container-fluid" id="body">
+      <%= yield %>
+    </main>
+  </body>
+</html>

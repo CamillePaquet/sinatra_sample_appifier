@@ -1,0 +1,122 @@
+---
+:application:
+  :default:
+    :version: 0.9.0
+    :api:
+      :auth: true
+
+    :mongodb:
+      :url: mongodb://mongodb:27017/ppaservice
+    :redis:
+      :url: redis://redis:6379/1
+
+    :routes:
+      :definitions:
+        :GET:
+          - :route: "/"
+            :public: true
+          - :route: "/anonymous"
+            :layout: :layout_min
+            :public: true
+          - :route: "/admin/user/create"
+            :profiles:
+              - :admin
+          - :route: "/admin/users"
+            :profiles:
+              - :admin
+        :POST:
+        :DELETE:
+        :PUT:
+
+    :profiles:
+      :default: :user
+      :additional:
+        - :admin
+
+    :menus:
+      :general:
+        - :name: :home
+          :route: /
+          :access: :user
+          :root: /
+        - :name: :admin
+          :access: :admin
+          :dropdown:
+            - :name: :create_user
+              :route: /admin/user/create
+              :access: :admin
+            - :name: :list_users
+              :route: /admin/users
+              :access: :admin
+
+    :status:
+      :error_system:
+        :code: 500
+        :name: Error System
+        :description: Error System
+      :created_success:
+        :code: 201
+        :name: Created or Modified,
+        :description: Successfully created or updated
+      :success:
+        :code: 200
+        :name: Success
+        :description: Successful HTTP Request
+      :deleted_success:
+        :code: 204
+        :name: Deleted
+        :description: Successfully deleted
+      :error_not_found:
+        :code: 404
+        :name: Not Found
+        :description: Ressource is not found
+      :error_delete:
+        :code: 405
+        :name: Deleted Error
+        :description: Ressource could not be deleted
+      :error_no_content:
+        :exceptions:
+          - Mongoid::Errors::DocumentNotFound
+        :code: 205
+        :name: No Content
+        :description: Server accepting request but not returning any content
+      :error_request:
+        :code: 400
+        :name: Bad Request
+        :description: Request could be not fullfiled due to an incorrect syntax
+      :error_already_exist:
+        :code: 400
+        :name: Bad Request
+        :description: Object already exist
+      :error_service_unavailable:
+        :exceptions:
+          - Mongo::Error::NoServerAvailable
+        :code: 503
+        :name: Service Unavailable
+        :description: Database connexion failed
+      :unauthorized:
+        :code: 401
+        :name: Authentification Requiered
+        :description: Limited access
+      :arg_error:
+        :code: 600
+        :name: Argument error
+        :description: arg error
+        :exceptions:
+          - ArgumentError
+    :metrics:
+      - :name: :ppa_count
+        :description: PPA update request
+        :proc: "10"
+
+  :development:
+    :application:
+      :name: PPA DEV
+
+  :staging:
+    :application:
+      :name: PPA STAGING
+
+  :production:
+    :application:
+      :name: PPA

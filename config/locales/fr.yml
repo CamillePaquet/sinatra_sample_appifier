@@ -1,0 +1,87 @@
+fr:
+  default:
+    home: Accueil
+    page_not_found: La page demandée est introuvable.
+    error_system: Une erreur s'est produite, veuillez ressayer ultérieurement.
+    environment: Environnement
+    current_version: Version actuelle
+    close: Fermer
+    irreversible_action: Cette action est irréversible.
+  menu:
+    labels:
+      home: Accueil
+      list_users: Liste d'utilisateurs
+      create_user: Créer un utilisateur
+      admin: Admin
+      create_message: Créer un message
+  form:
+    edit: Modifier
+    save: Enregistrer
+    actions: Actions
+    cancel: Annuler
+    user:
+      enter_password: Veuillez entrer un mot de passe
+      password_min_characters: Le mot de passe doit faire minimum 8 caractères.
+      enter_password_confirmation: Veuillez saisir votre mot de passe pour la confirmation
+      invalid_password_confirmation: Le mot de passe de confirmation est invalide.
+    admin:
+      enter_fullname: Entrez un nom complet.
+      enter_username: Entrez un nom d'utilisateur.
+      enter_email: Entrez un email.
+      enter_password: Entrez un mot de passe.
+      enter_profile: Entrez le(s) profil(s) utilisateur.
+      enter_token: Entrez le token utilisateur.
+      enter_title: Entrez le titre du message.
+      enter_content: Entrez le contenu du message.
+      fullname_min_characters: Le nom complet doit faire minimum 2 caractères.
+      fullname_max_characters: Le nom complet doit faire maximum 15 caractères.
+      username_min_characters: Le nom d'utilisateur doit faire minimum 2 caractères.
+      username_max_characters: Le nom d'utilisateur doit faire maximum 15 caractères.
+      title_min_characters: Le titre doit faire minimum 3 caractères.
+      title_max_characters: Le titre doit faire maximum 15 caractères.
+      content_min_characters: Le contenu doit faire minimum 3 caractères.
+      content_max_characters: Le contenu doit faire maximum 500 caractères.
+      email_min_characters: L'email doit faire minimum 10 caractères.
+      email_max_characters: L'email doit faire maximum 30 caractères.
+      password_min_characters: Le mot de passe doit faire minimum 6 caractères.
+      password_max_characters: Le mot de passe doit faire maximum 20 caractères.
+      token_min_characters: Le token doit faire minimum 15 caractères.
+      user_deletion: Suppression de l'utilisateur
+      want_to_delete_user: Voulez-vous supprimer l'utilisateur ?
+  navigation:
+    deconnexion: Déconnexion
+    user_list: Liste d'utilisateurs
+    create_user: Créer un utilisateur
+    update_user: Modifier un utilisateur
+    home: Accueil
+    connection: Connexion
+    edit_profil: Modifier mon profil
+  user:
+    password: Mot de passe
+    password_confirmation: Confirmez le mot de passe
+    update_password: Modifiez votre mot de passe
+    username: Nom d'utilisateur
+    fullname: Nom complet
+    email: Email
+    additional_profiles: Profils supplémentaires
+    profiles: Profils
+    token: Token
+    api_user: Utilisateur d'API
+    empty_password: Mot de passe vide
+    new_token_registered: Nouveau token enregistré
+    need_registration: Vous devez être authentifié
+    bad_profil: Vous n'avez pas le profil correspondant
+    bad_credentials: Mot de passe ou identifiant incorrect
+    edit_profile: Modifier mon profil
+    api: API
+  message:
+    type: Type
+    title: Titre
+    content: Contenu
+    global: Global
+    users: Utilisateurs
+    new_informations: Nouvelles informations
+    alerts: Avertissements
+    check_to_delete: Cochez les cases pour supprimer les élements
+    ok: Ok
+    delete: Supprimer

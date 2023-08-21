@@ -1,0 +1,50 @@
+---
+:fixtures:
+  :type: :mongoid
+  :rules:
+    :generation:
+      :token:
+        :proc: "SecureRandom.urlsafe_base64(64)"
+  :models:
+    :order:
+      - :users
+      - :messages
+    :definition:
+      :users:
+        :class: Application::Models::User
+        :unicity: :username
+        :rules:
+          :token: :token
+        :collection:
+          - :attributes:
+              :username: ABCD1234
+              :password: password
+              :token:
+              :profiles:
+                - :user
+                - :admin
+              :fullname: Tests admin
+              :email: acbd1234@gmail.com
+              :api_user: true
+          - :attributes:
+              :username: AAAA1111
+              :password: password
+              :token:
+              :profiles:
+                - :user
+              :fullname: Tests pas admin
+              :email: aaaa1111@gmail.com
+      :messages:
+        :class: Application::Models::Message
+        :unicity: :id
+        :collection:
+          - :attributes:
+              :title: Bienvenue sur l'application %%APPNAME%%
+              :content: Nous vous souhaitons la bienvenue sur l'application %%APPNAME%%, vous pouvez dès à présent ajouter vos fonctionnalités.
+              :type: info
+            :links:
+              - :collection: :users
+                :index:
+                  :at: 1
+                :fkey: :user
+                :pkey: :id

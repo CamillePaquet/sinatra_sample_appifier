@@ -1,0 +1,105 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top px-2">
+  <div class="top-0 mt-1 flash position-absolute w-50 start-50 translate-middle-x ">
+    <% flash.keys.each do |type| %>
+      <div role='alert ' class="alert alert-flash bg-white  alert-<%=type%> alert-dismissible fade show m-auto">
+        <span class="alert-icon"><span class="visually-hidden">flash[type]</span></span>
+        <p><%= flash[type] %></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"><span class="visually-hidden"><%=translate("default.close")%></span></button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="container-fluid">
+    <h1 class="mb-0 mx-3"><%= get_config.application.name %></h1>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <% if @nav_menu != false %>
+        <ul class="navbar-nav me-auto">
+          <% @nav_menu.each do |menu_item| %>
+            <% if menu_item.include?(:dropdown) %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= translate("menu.labels.#{menu_item[:name].to_s}")%>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <% menu_item.dropdown.each do |dropdown_item|%>
+                    <li>
+                      <a class="dropdown-item" href="<%= dropdown_item.route%>">
+                        <%= translate("menu.labels.#{dropdown_item[:name].to_s}")%>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+
+            <% else %>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="<%= menu_item.route %>"><%= translate("menu.labels.#{menu_item[:name].to_s}")%></a>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="d-flex justify-content-end align-items-center flex-grow-1" id="navbarCollapse">
+        <div class="btn-group ">
+          <% if logged_in? then %>
+            <div>
+              <button type="button" class="btn btn-icon btn-secondary rounded-circle mx-1 position-relative" id="buttonToastInfos">
+                <%if @infos.count > 0 then %>
+                  <span class="px-1 rounded-circle bg-danger number-message"><%=@infos.count%></span>
+                <%end%>
+                <span class="px-1"><i class="fas fa-info"></i></span>
+              </button>
+              <button type="button" class="btn btn-icon btn-primary rounded-circle mx-1 position-relative" id="buttonToastAlerts">
+                <%if @alerts.count > 0 then %>
+                  <span class="px-1 rounded-circle bg-danger number-message"><%=@alerts.count%></span>
+                <%end%>
+                <i class="fas fa-exclamation-triangle"></i>
+              </button>
+            </div>
+            <div class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%=session['user_fullname']%>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="/profile/update"><%=translate("navigation.edit_profil")%></a></li>
+                </ul>
+              </li>
+            </div>
+            <a class="btn btn-primary" href="/logout"><%=translate("navigation.deconnexion")%></a>
+          <% else %>
+            <a class="btn btn-primary" href="/login"><%=translate("navigation.connection")%></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <script>
+    $(document).ready(function() {
+
+      $(".alert-flash").fadeTo(3000, 1000).slideUp(1000, function() {
+        $(".alert-flash").slide
+        Up(1000)
+      });
+
+      $("#buttonToastInfos").click(function(){
+        number_infos = <%=@infos.count%>
+        if(number_infos > 0){
+          $('#toastAlerts').toast('hide');
+          $('#toastInfos').toast('show');
+        }
+      });
+
+      $("#buttonToastAlerts").click(function(){
+        number_alerts = <%=@alerts.count%>
+        if(number_alerts > 0){
+          $('#toastInfos').toast('hide');
+          $('#toastAlerts').toast('show');
+        }
+      });
+
+    });
+  </script>

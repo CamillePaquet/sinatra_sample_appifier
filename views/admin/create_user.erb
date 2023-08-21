@@ -1,0 +1,112 @@
+<div class="container">
+  <form action="/admin/user/create" method="post" id="createUser" class="needs-validation">
+    <div class="mb-3">
+      <label for="username" class="form-label is-required"><%=translate("user.username")%></label>
+      <input type="text" class="form-control" id="username" name="username">
+    </div>
+    <div class="mb-3">
+      <label for="fullname" class="form-label is-required"><%=translate("user.fullname")%></label>
+      <input type="fullname" class="form-control" id="fullname" name="fullname">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label is-required"><%=translate("user.email")%></label>
+      <input type="email" class="form-control" id="email"  name="email">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label is-required"><%=translate("user.password")%></label>
+      <input type="password" class="form-control" id="password"  name="password">
+    </div>
+    <div class="mb-3">
+      <label for="profiles" class="form-label is-required"><%=translate("user.additional_profiles")%></label>
+      <input id="profiles" class="form-control" type="text" name="profiles" placeholder="<%=translate("user.additional_profiles")%>" />
+    </div>
+    <div class="mb-3">
+      <label for="token" class="form-label is-required"><%=translate("user.token")%></label>
+      <div class="container-token">
+        <input id="token"class="form-control" type="text" name="token" placeholder="<%=translate("user.token")%>" value="<%=@token%>" readonly/>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="api_user" name="api_user">
+        <label for="api_user" class="form-check-label"><%=translate("user.api_user")%></label>
+      </div>
+    </div>
+
+    <div class="mb-3 text-end">
+      <button type="submit" class="btn btn-primary"><%=translate("form.save")%></button>
+    </div>
+  </form>
+</div>
+
+<script>
+  $().ready(function(){
+
+    //Suggestions for user profil
+    profiles = <%=@profiles.to_json%>
+    suggestions = []
+    profiles.forEach(profile => {
+      suggestions.push({tag: `${profile}`, value: `${profile}` })
+    });
+    $('input[name="profiles"]').amsifySuggestags({
+      suggestions: suggestions
+    });
+
+
+    $('#createUser').validate({
+      ignore: "",
+      rules: {
+        username:  {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 15
+                  },
+        fullname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 15
+                  },
+        email:  {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 30
+                  },
+        password:  {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
+                  },
+        token:  {
+                    required: true,
+                    minlength: 15
+                  }
+      },
+      messages: {
+        fullname: {
+            required: "<%=translate('form.admin.enter_fullname')%>",
+            minlength: "<%=translate('form.admin.fullname_min_characters')%>",
+            maxlength: "<%=translate('form.admin.fullname_max_characters')%>"
+        },
+        username: {
+            required: "<%=translate('form.admin.enter_username')%>",
+            minlength: "<%=translate('form.admin.username_min_characters')%>",
+            maxlength: "<%=translate('form.admin.username_max_characters')%>"
+        },
+        email: {
+            required: "<%=translate('form.admin.enter_email')%>",
+            minlength: "<%=translate('form.admin.email_min_characters')%>",
+            maxlength: "<%=translate('form.admin.email_max_characters')%>"
+        },
+        password: {
+            required: "<%=translate('form.admin.enter_password')%>",
+            minlength: "<%=translate('form.admin.password_min_characters')%>",
+            maxlength: "<%=translate('form.admin.password_max_characters')%>"
+        },
+        token: {
+            required: "<%=translate('form.admin.enter_token')%>",
+            minlength: "<%=translate('form.admin.token_min_characters')%>"
+        }
+      }
+    });
+  });
+</script>

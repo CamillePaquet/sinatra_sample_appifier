@@ -1,0 +1,61 @@
+<div class="container">
+  <h1><%=translate("user.edit_profile")%></h1>
+  <form action="/profile/update" method="post" id="edit-profile" class="needs-validation">
+    <div class="mt-4">
+      <label for="fullname" class="form-label is-required h4"><%=translate("user.fullname")%></label>
+      <input id="fullname"class="form-control" type="text" name="fullname" placeholder="<%=translate("user.fullname")%>" value="<%=@user.fullname%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="email" class="form-label is-required h4"><%=translate("user.email")%></label>
+      <input id="email"class="form-control" type="text" name="email" placeholder="<%=translate("user.email")%>" value="<%=@user.email%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="password" class="form-label is-required h4"><%=translate("user.password")%></label>
+      <input id="password" class="form-control" type="password" name="password" placeholder="<%=translate("user.password")%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="token" class="form-label is-required h4"><%=translate("user.token")%></label>
+      <div class="container-token d-flex">
+        <input id="token" class="form-control" type="text" name="token" placeholder="<%=translate("user.token")%>" value="<%=@user.token%>" readonly/>
+        <button type="button" class="btn btn-primary ms-1" name="buttonGenerationToken" onclick="generateNewToken()"><i class="fas fa-sync-alt"></i></button>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div class="d-flex mt-4 justify-content-between">
+        <button type="submit" class="btn btn-success"><%=translate("form.save")%></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function generateNewToken(){
+    var token_input = document.getElementById('token');
+    token_input.value = `<%=generate_token!.to_s%>`
+  }
+
+  $().ready(function(){
+
+    $.validator.addMethod('isSecured', function (value, element, param) {
+        if(value!=""){
+          return (value.length>=8 ? true : false);
+        } else {
+          return true;
+        }
+        return isValid;
+    }, '');
+
+    $('#edit-profile').validate({
+      rules: {
+        password: {
+                    isSecured: true
+                  },
+      },
+      messages: {
+        password: {
+            isSecured: "<%=translate('form.user.password_min_characters')%>"
+        }
+      }
+    });
+  })
+</script>

@@ -1,0 +1,20 @@
+<div class="modal" tabindex="-1" id="modalDeleteUser<%=user.id%>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%=translate("form.admin.user_deletion")%></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"><span class="visually-hidden">Close</span></button>
+      </div>
+      <div class="modal-body">
+        <p><%=translate("form.admin.want_to_delete_user")%></p>
+        <p><%=translate("home.irreversible_action")%> </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+        <form id="delete-User" class="" action='/admin/user/delete/<%=user.id%>' method="post">
+          <button id="delete" type="submit" class="btn btn-primary">Oui</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

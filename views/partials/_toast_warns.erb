@@ -1,0 +1,54 @@
+<div class="toast position-absolute bg-white top-0 end-0 p-2" style="height: 75vh" id="toastAlerts"  data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
+  <div style="height: 100%; overflow-y: hidden;">
+    <div class="toast-header d-flex flex-row justify-content-between align-items-center ">
+      <div>
+        <h4 class="m-0"><%=translate("message.alerts")%></h4>
+        <span class="text-primary text-sm font-italic"><%=translate("message.check_to_delete")%></span>
+      </div>
+      <button type="button" class="close btn" data-bs-dismiss="toast" aria-label="Fermer"><i class="fas fa-times fa-lg"></i></button>
+    </div>
+    <div id="toast_alerts_body"class="toast-body" style="height: 100%; overflow-y: scroll;">
+      <%@alerts.each do |warn| %>
+        <div class="d-flex flex-row align-items-center justify-content-between">
+          <div>
+            <a href="/message/<%=warn.id%>">
+              <h5><%=warn.title%></h5>
+            </a>
+            <p><%=markdown(warn.content).to_s.gsub(%r{</?[^>]+?>}, '').truncate(60, separator: /\s/)%></p>
+          </div>
+          <div class="">
+            <button class="buttonCheckAlertToast btn" id="<%=warn.id%>" type="button"><i class="far fa-square square-orange fa-lg"></i></button>
+          </div>
+        </div>
+        <hr class="my-2 bg-light"/>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.buttonCheckAlertToast').each(function(i, obj) {
+      $(this).click(function(){
+        $(this).find(">:first-child").removeClass("fa-square");
+        $(this).find(">:first-child").addClass("fa-check-square");
+        message_id = $(this)[0].id
+        setTimeout(function(){
+            $.ajax({
+              url: `/message/${message_id}`,
+              type: 'DELETE',
+              success: function(result) {
+                $("#buttonToastAlerts").load(" #buttonToastAlerts > *");
+                number_alerts = <%=@alerts.count - 1%>
+                if(number_alerts == 0){
+                  $('#toastAlerts').toast('hide');
+                } else {
+                  $("#toast_alerts_body").load(" #toast_alerts_body > *");
+                }
+              }
+            });
+        }, 1000);
+      });
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+<div class="container bg-light p-5">
+  <h1 class="text-primary"><%= markdown(@message.title) %></h1>
+  <div class="container">
+    <%= markdown(@message.content) %>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-primary" id="button-delete"><%=translate('message.delete')%></button>
+    <a href="/" class="btn btn-success"><%=translate('message.ok')%></a>
+  </div>
+</div>
+
+<script>
+  $('#button-delete').click(function(){
+    message_id = '<%=@message.id%>'
+    setTimeout(function(){
+        $.ajax({
+          url: `/message/${message_id}`,
+          type: 'DELETE',
+          success: function(result) {
+            window.location = "/";
+          }
+        });
+    }, 1000);
+  });
+</script>

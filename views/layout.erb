@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="uft-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="%%APP_DESCRIPTION%%">
+    <meta name="author" content="%%AUTHOR_NAME%%">
+    <meta name="generator" content="%%GENERATOR_NAME%%">
+    <title>Application</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="img/favicons/favicon.ico">
+
+    <%= erb :"partials/_include", :format => :html %>
+  </head>
+
+  <body class="position-relative">
+    <%= erb :"partials/_nav", :format => :html %>
+    <main class="container-fluid mt-4" id="body">
+      <div class="px-4 rounded position-relative">
+        <div class="content position-relative p-5">
+          <%= erb :"partials/_toast_infos", :format => :html %>
+          <%= erb :"partials/_toast_warns", :format => :html %>
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </body>
+  <%= erb :"partials/_footer", :format => :html %>
+</html>

@@ -1,0 +1,35 @@
+body {
+  min-height: auto !important;
+  padding-top: 4.5rem;
+}
+
+.flash {
+  z-index: 10000;
+}
+
+.toast-container {
+  z-index: 9000;
+}
+
+.square-orange{
+  color: #ff7900;
+}
+
+.fa-check-square{
+  color: #32c832 ;
+}
+
+.number-message{
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.error {
+  color: red;
+  padding: 6px 0;
+}
+
+.font-italic{
+  font-style: italic;
+}

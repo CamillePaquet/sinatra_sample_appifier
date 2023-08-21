@@ -1,0 +1,123 @@
+<div class="container">
+  <form action="/admin/user/update/<%=@user.id.to_s%>" method="post" id="update-user" class="needs-validation">
+    <div class="mt-4">
+      <label for="username" class="form-label is-required h4"><%=translate("user.username")%></label>
+      <input id="username"class="form-control" type="text" name="username" placeholder="Username" value="<%=@user.username%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="fullname" class="form-label is-required h4"><%=translate("user.fullname")%></label>
+      <input id="fullname"class="form-control" type="text" name="fullname" placeholder="<%=translate("user.fullname")%>" value="<%=@user.fullname%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="email" class="form-label is-required h4"><%=translate("user.email")%></label>
+      <input id="email"class="form-control" type="email" name="email" placeholder="<%=translate("user.email")%>" value="<%=@user.email%>"/>
+    </div>
+    <div class="mt-4">
+      <label for="profiles" class="form-label is-required h4"><%=translate("user.additional_profiles")%></label>
+      <input id="profiles" class="form-control" type="text" name="profiles" placeholder="<%=translate("user.additional_profiles")%>"/>
+    </div>
+    <div class="mt-4">
+      <div class="form-check form-switch h4">
+        <input class="form-check-input" type="checkbox" role="switch" id="api_user" name="api_user" <%if @user.api_user%> checked <%end%>>
+        <label for="api_user" class="form-check-label"><%=translate("user.api_user")%></label>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div class="mt-4">
+        <label for="token" class="form-label is-required h4"><%=translate("user.token")%></label>
+        <div class="container-token d-flex">
+          <input id="token" class="form-control" type="text" name="token" placeholder="<%=translate("user.token")%>" value="<%=@user.token%>" readonly/>
+          <button type="button" class="btn btn-primary ms-1" name="buttonGenerationToken" onclick="generateNewToken()"><i class="fas fa-sync-alt"></i></button>
+        </div>
+      </div>
+      <div class="d-flex mt-4 justify-content-between">
+        <a href="/admin/users" class="btn btn-danger"><%=translate("form.cancel")%></a>
+        <button type="submit" class="btn btn-success"><%=translate("form.save")%></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function generateNewToken(){
+    var token_input = document.getElementById('token');
+    token_input.value = `<%=generate_token!.to_s%>`
+  }
+
+
+
+  //Suggestions for user profil
+  $(document).ready(function(){
+    profiles = <%=@profiles.to_json%>
+    suggestions = []
+    profiles.forEach(profile => {
+      suggestions.push({tag: `${profile}`, value: `${profile}` })
+    });
+    $('input[name="profiles"]').amsifySuggestags({
+      suggestions: suggestions
+    });
+  });
+
+  //Select user profils for actual user
+  user = <%=@user.to_json%>
+  amsifySuggestags = new AmsifySuggestags($('input[name="profiles"]'));
+  user['profiles'].forEach(profile => {
+    if(profile != 'user') {
+      amsifySuggestags.addTag(profile);
+    }
+  });
+
+  $().ready(function(){
+
+    $('#update-user').validate({
+      ignore: "",
+      rules: {
+        fullname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 15
+                  },
+        username:  {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 15
+                  },
+        email:  {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 30
+                  },
+        token:  {
+                    required: true,
+                    minlength: 15
+                  }
+      },
+      messages: {
+        fullname: {
+            required: "<%=translate('form.admin.enter_fullname')%>",
+            minlength: "<%=translate('form.admin.fullname_min_characters')%>",
+            maxlength: "<%=translate('form.admin.fullname_max_characters')%>"
+        },
+        username: {
+            required: "<%=translate('form.admin.enter_username')%>",
+            minlength: "<%=translate('form.admin.username_min_characters')%>",
+            maxlength: "<%=translate('form.admin.username_max_characters')%>"
+        },
+        email: {
+            required: "<%=translate('form.admin.enter_email')%>",
+            minlength: "<%=translate('form.admin.email_min_characters')%>",
+            maxlength: "<%=translate('form.admin.email_max_characters')%>"
+        },
+        password: {
+            required: "<%=translate('form.admin.enter_password')%>",
+            minlength: "<%=translate('form.admin.password_min_characters')%>",
+            maxlength: "<%=translate('form.admin.password_max_characters')%>"
+        },
+        token: {
+            required: "<%=translate('form.admin.enter_token')%>",
+            minlength: "<%=translate('form.admin.token_min_characters')%>"
+        }
+      }
+    });
+  })
+</script>
