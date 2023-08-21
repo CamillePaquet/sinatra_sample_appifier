@@ -6,9 +6,17 @@
     - Camille Paquet
   :description: a sinatra sample template
   :dataset:
-    :appname:
-      :description: sinatra sample
-      :default: test_application
+    :application:
+      :description: application name
+      :default: application
+      :format: \w+
+    :namespace:
+      :description: application namespace
+      :default: namespace
+      :format: \w+
+    :namespace:
+      :description: application namespace
+      :default: namespace
       :format: \w+
 :actions:
   :deploy: {}
