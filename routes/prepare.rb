@@ -1,12 +1,12 @@
 # encoding: UTF-8
-Application::PPAService.namespace '/api/generic' do
+%%APPLICATION%%::%%NAMESPACE%%.namespace '/api/generic' do
   before do
 
     content_type 'application/json'
   end
 end
 
-Application::PPAService.namespace '/api/v1' do
+%%APPLICATION%%::%%NAMESPACE%%.namespace '/api/v1' do
 
   before do
     content_type 'application/json'

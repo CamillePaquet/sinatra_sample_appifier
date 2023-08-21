@@ -1,11 +1,11 @@
-module Application
+module %%APPLICATION%%
   class RouteGuard
     def initialize
       @definitions = get_config.routes.definitions
     end
 
     def check(user_id:, path:, method:)
-      profiles = (user_id)? Application::Models::User.find(user_id).profiles : []
+      profiles = (user_id)? %%APPLICATION%%::Models::User.find(user_id).profiles : []
       matched_routes = {}
       matched_routes = @definitions[method].select { |definition| Mustermann.new(definition[:route]) =~ path } unless @definitions[method].nil?
       if matched_routes.empty?  then 

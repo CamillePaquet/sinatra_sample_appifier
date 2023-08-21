@@ -1,4 +1,4 @@
-Application::PPAService.before do
+%%APPLICATION%%::%%NAMESPACE%%.before do
   notify metric: :status
   @path = request.path_info
   @method = request.request_method.to_sym
@@ -27,12 +27,12 @@ Application::PPAService.before do
   end
 end
 
-Application::PPAService.not_found do
+%%APPLICATION%%::%%NAMESPACE%%.not_found do
   status 404
   render_erb view: :'/errors/404', layout: :layout_min
 end
 
-Application::PPAService.error 500 do
+%%APPLICATION%%::%%NAMESPACE%%.error 500 do
   status 500
   render_erb view: :'/errors/500', layout: :layout_min
 end

@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Helpers
     module Token
       def generate_token!

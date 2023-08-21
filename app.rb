@@ -12,19 +12,19 @@ Carioca::Registry.configure do |spec|
   spec.locales_load_path << Dir[File.expand_path('./config/locales') + '/*.yml']
 end
 
-include Application::Helpers::Config
-include Application::Helpers::Status
-include Application::Helpers::Metrics
-include Application::Helpers::Display
-include Application::Helpers::Token
-include Application::Helpers::User
-include Application::Helpers::I18n
-include Application::Helpers::ServicesCheckers
-include Application::Helpers::RouteGuard
+include %%APPLICATION%%::Helpers::Config
+include %%APPLICATION%%::Helpers::Status
+include %%APPLICATION%%::Helpers::Metrics
+include %%APPLICATION%%::Helpers::Display
+include %%APPLICATION%%::Helpers::Token
+include %%APPLICATION%%::Helpers::User
+include %%APPLICATION%%::Helpers::I18n
+include %%APPLICATION%%::Helpers::ServicesCheckers
+include %%APPLICATION%%::Helpers::RouteGuard
 
 Sass::Plugin.options[:style] = :compressed
 
-module Application
+module %%APPLICATION%%
   # initialize Application Controller
   class Controller < Carioca::Container
     inject service: :configuration
@@ -33,27 +33,27 @@ module Application
   end
 
   # Sinatra modular Application definition
-  class PPAService < Sinatra::Base
+  class %%NAMESPACE%% < Sinatra::Base
     set :raise_errors, false
     set :show_exceptions, false
     register Sinatra::Namespace
     register Sinatra::Flash
-    include Application::Metrics
+    include %%APPLICATION%%::Metrics
 
     helpers do
       include Sinatra::Authorization::Helpers
     end
 
     use Sass::Plugin::Rack
-    use Rack::Session::Redis, redis_server: Application::Controller.configuration.settings.redis.url
+    use Rack::Session::Redis, redis_server: %%APPLICATION%%::Controller.configuration.settings.redis.url
   end
 end
 
-Application::Controller.logger.fatal('Backends not available') && exit(10) unless backend_available?
+%%APPLICATION%%::Controller.logger.fatal('Backends not available') && exit(10) unless backend_available?
 
 Mongoid.configure do |config|
   config.clients.default = {
-    uri: Application::Controller.configuration.settings.mongodb.url
+    uri: %%APPLICATION%%::Controller.configuration.settings.mongodb.url
   }
   config.belongs_to_required_by_default = false
 end
@@ -65,9 +65,9 @@ require_relative 'routes/prepare'
 require_relative 'controller/prepare'
 require_relative 'lib/user_manager'
 
-include Application::Serializer
-include Application::Models
+include %%APPLICATION%%::Serializer
+include %%APPLICATION%%::Models
 
-Application::Controller.logger.info(to_s) { 'Ready to serve' }
+%%APPLICATION%%::Controller.logger.info(to_s) { 'Ready to serve' }
 
 notify unless defined?(Rake) or defined?(RSpec)

@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Helpers
     module Status
       def get_status_from_map(key: nil)

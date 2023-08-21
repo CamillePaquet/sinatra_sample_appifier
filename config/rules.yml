@@ -11,7 +11,7 @@
       - :messages
     :definition:
       :users:
-        :class: Application::Models::User
+        :class: %%APPLICATION%%::Models::User
         :unicity: :username
         :rules:
           :token: :token
@@ -35,7 +35,7 @@
               :fullname: Tests pas admin
               :email: aaaa1111@gmail.com
       :messages:
-        :class: Application::Models::Message
+        :class: %%APPLICATION%%::Models::Message
         :unicity: :id
         :collection:
           - :attributes:

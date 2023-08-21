@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Serializer
     class StatusSerializer < Hash
       def initialize

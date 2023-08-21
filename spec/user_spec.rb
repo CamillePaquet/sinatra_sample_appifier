@@ -2,7 +2,7 @@ describe 'Posts REST API User' do
   before :all do
     Mongoid.purge!
     get_config.api.auth = false
-    $service = RestService::new :service => Application::PPAService
+    $service = RestService::new :service => %%APPLICATION%%::%%NAMESPACE%%
   end
 
   subject { $service }

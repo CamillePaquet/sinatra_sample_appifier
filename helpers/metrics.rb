@@ -1,8 +1,8 @@
-module Application
+module %%APPLICATION%%
   module Helpers
     module Metrics
       def notify(**keywords)
-        Application::Metrics::Notifier.instance.notify **keywords
+        %%APPLICATION%%::Metrics::Notifier.instance.notify **keywords
       end
     end
   end

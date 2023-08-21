@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Serializer
     class UserSerializer
       def initialize(model:, type: :lazy)

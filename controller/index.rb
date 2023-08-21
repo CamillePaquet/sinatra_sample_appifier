@@ -1,9 +1,8 @@
-# Application::PPAService.namespace '/' do
-Application::PPAService.get '/' do
+
+%%APPLICATION%%::%%NAMESPACE%%.get '/' do
     render_erb view: :index
 end
 
-Application::PPAService.get '/anonymous' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/anonymous' do
   render_erb view: :index
 end
-# end

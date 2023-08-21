@@ -1,4 +1,4 @@
-Application::PPAService.namespace '/api/v1' do
+%%APPLICATION%%::%%NAMESPACE%%.namespace '/api/v1' do
   get '/users.?:loading?' do |loading|
     return secure_api_return status_key: :success do
       users = User.all
@@ -20,7 +20,7 @@ Application::PPAService.namespace '/api/v1' do
       body = request.body.read
       data = JSON.parse(body)
       if User.where(username: data['username']).exists?
-        raise Application::Helpers::Status::SpecificError.new(status_key: :error_already_exist)
+        raise %%APPLICATION%%::Helpers::Status::SpecificError.new(status_key: :error_already_exist)
       else
         user = User.create!(
           username: data['username'],

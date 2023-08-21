@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Models
     class User
       include Mongoid::Document

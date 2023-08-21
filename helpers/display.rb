@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Helpers
     module Display
       def get_goroco
@@ -21,11 +21,11 @@ module Application
       end
 
       def negociate_layout(path:, method:)
-        Application::LayoutManager.new(path: path, method: method).negociate
+        %%APPLICATION%%::LayoutManager.new(path: path, method: method).negociate
       end
 
       def negociate_menu(user_id:, menu: :general)
-        Application::MenuManager.new(user_id: user_id, menu: menu).negociate
+        %%APPLICATION%%::MenuManager.new(user_id: user_id, menu: menu).negociate
       end
 
       def render_erb(view:, layout: nil)

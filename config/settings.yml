@@ -115,7 +115,7 @@
     :metrics:
       - :name: :users
         :description: Nb application users
-        :proc: Application::Models::User.all.size
+        :proc: %%APPLICATION%%::Models::User.all.size
         :labels: 
           :application: 
             :proc: get_config.application.name.gsub(' ','_')

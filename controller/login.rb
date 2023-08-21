@@ -1,8 +1,8 @@
-Application::PPAService.get '/login' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/login' do
   render_erb view: :login
 end
 
-Application::PPAService.post '/login' do
+%%APPLICATION%%::%%NAMESPACE%%.post '/login' do
   user = nil
   user_password = nil
   if User.where(username: params[:username]).exists?
@@ -25,7 +25,7 @@ Application::PPAService.post '/login' do
   end
 end
 
-Application::PPAService.get '/logout' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/logout' do
   session['user_username'] = nil
   session['token'] = nil
   session['auth'] = false
@@ -33,12 +33,12 @@ Application::PPAService.get '/logout' do
   redirect '/login'
 end
 
-Application::PPAService.get '/profil/update' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/profil/update' do
   @user = User.find_by(username: session['user_username'])
   render_erb view: :edit_profil
 end
 
-Application::PPAService.post '/profil/update' do
+%%APPLICATION%%::%%NAMESPACE%%.post '/profil/update' do
   user = User.find_by(username: session['user_username'])
   new_password = params['password'] unless params['password'].empty?
   confirm_password = params['confirm_password'] unless params['confirm_password'].empty?
@@ -54,7 +54,7 @@ Application::PPAService.post '/profil/update' do
   redirect '/profil/update'
 end
 
-Application::PPAService.post '/profil/update/token' do
+%%APPLICATION%%::%%NAMESPACE%%.post '/profil/update/token' do
   user = User.find_by(username: session['user_username'])
   new_token = generate_token!.to_s
   user.update_attributes!(token: new_token)

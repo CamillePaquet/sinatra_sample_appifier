@@ -1,6 +1,6 @@
 
 
-Application::PPAService.namespace '/api/generic' do
+%%APPLICATION%%::%%NAMESPACE%%.namespace '/api/generic' do
   get '/status' do
     return secure_api_return status_key: :success, structured: true do 
       status = StatusSerializer::new

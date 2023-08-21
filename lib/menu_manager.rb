@@ -1,7 +1,7 @@
-module Application
+module %%APPLICATION%%
   class MenuManager
     def initialize(user_id:, menu: :general, wanted: :home)
-      @user = Application::Models::User.find(user_id) if user_id
+      @user = %%APPLICATION%%::Models::User.find(user_id) if user_id
       @menu = get_config.menus[menu]
       @wanted = wanted
       @allowed = [:anonymous]

@@ -106,17 +106,17 @@
           - ArgumentError
     :metrics:
       - :name: :ppa_count
-        :description: PPA update request
+        :description: %%APPLICATION%% update request
         :proc: "10"
 
   :development:
     :application:
-      :name: PPA DEV
+      :name: %%APPLICATION%% DEV
 
   :staging:
     :application:
-      :name: PPA STAGING
+      :name: %%APPLICATION%% STAGING
 
   :production:
     :application:
-      :name: PPA
+      :name: %%APPLICATION%%

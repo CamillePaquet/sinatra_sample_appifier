@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   module Models
     class Message
       include Mongoid::Document

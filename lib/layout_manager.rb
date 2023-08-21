@@ -1,4 +1,4 @@
-module Application
+module %%APPLICATION%%
   class LayoutManager
     def initialize(path:, method:)
       @path = path

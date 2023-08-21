@@ -1,10 +1,10 @@
-Application::PPAService.get '/admin/user/create' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/admin/user/create' do
   @profiles = get_config.profiles.additional
   @token = generate_token!
   render_erb view: :'admin/create_user'
 end
 
-Application::PPAService.post '/admin/user/create' do
+%%APPLICATION%%::%%NAMESPACE%%.post '/admin/user/create' do
   User.create!(
     username: params['username'],
     profiles: params['profiles'].split(',').map(&:to_sym).push(get_config.profiles[:default]),
@@ -19,13 +19,13 @@ Application::PPAService.post '/admin/user/create' do
   redirect '/admin/users'
 end
 
-Application::PPAService.get '/admin/user/update/:id' do |id|
+%%APPLICATION%%::%%NAMESPACE%%.get '/admin/user/update/:id' do |id|
   @user = User.find(id)
   @profiles = get_config.profiles.additional
   render_erb view: :'admin/update_user'
 end
 
-Application::PPAService.post '/admin/user/update/:id' do |id|
+%%APPLICATION%%::%%NAMESPACE%%.post '/admin/user/update/:id' do |id|
   user = User.find(id) if User.where(id: id).exists?
   data = {}
   data['username'] = params['username']
@@ -44,12 +44,12 @@ Application::PPAService.post '/admin/user/update/:id' do |id|
   redirect '/admin/users'
 end
 
-Application::PPAService.get '/admin/users' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/admin/users' do
   @users = User.all
   render_erb view: :'admin/list_users'
 end
 
-Application::PPAService.post '/admin/user/delete/:id' do |id|
+%%APPLICATION%%::%%NAMESPACE%%.post '/admin/user/delete/:id' do |id|
   if User.where(id: id).exists?
     user = User.find(id)
     user.delete
@@ -58,13 +58,13 @@ Application::PPAService.post '/admin/user/delete/:id' do |id|
   redirect '/admin/users'
 end
 
-Application::PPAService.get '/admin/message/create' do
+%%APPLICATION%%::%%NAMESPACE%%.get '/admin/message/create' do
   @types = get_config.messages.types
   @users = User.all
   render_erb view: :'admin/create_message'
 end
 
-Application::PPAService.post '/admin/message/create' do
+%%APPLICATION%%::%%NAMESPACE%%.post '/admin/message/create' do
   if params['global']
     User.all.each do |user|
       message = Message.create!(

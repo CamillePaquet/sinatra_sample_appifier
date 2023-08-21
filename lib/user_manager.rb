@@ -1,11 +1,11 @@
-module Application
+module %%APPLICATION%%
   class UserManager
     def initialize(session:)
       @session = session
     end
 
     def get_logged_user
-      @user = Application::Models::User.find_by(fullname: @session['user_fullname']) unless @session.empty?
+      @user = %%APPLICATION%%::Models::User.find_by(fullname: @session['user_fullname']) unless @session.empty?
     end
 
     def logged_in?

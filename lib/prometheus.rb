@@ -1,4 +1,4 @@
-module  Application
+module  %%APPLICATION%%
   module Metrics
     class Notifier
 
@@ -6,7 +6,7 @@ module  Application
 
       def initialize
         @prometheus = ::Prometheus::Client.registry
-        @metrics = Application::Controller.configuration.settings.metrics.each do |metric|
+        @metrics = %%APPLICATION%%::Controller.configuration.settings.metrics.each do |metric|
           eval("metric[:proc] = lambda { #{metric[:proc]} } ")
           metric[:labels].each {|label,definition|  eval("definition[:proc] = lambda { #{definition[:proc]} } ") } if metric[:labels]
           labels  = (metric[:labels]) ? metric[:labels].keys : []
@@ -14,7 +14,7 @@ module  Application
           @prometheus.register(metric[:gauge])
         end
         
-        Application::Controller.logger.info(self.to_s) { "Initializing Prometheus Notifier" }
+        %%APPLICATION%%::Controller.logger.info(self.to_s) { "Initializing Prometheus Notifier" }
 
       end
 
@@ -31,7 +31,7 @@ module  Application
     end
     
     def self.included(obj)
-      Application::Metrics::Notifier.instance 
+      %%APPLICATION%%::Metrics::Notifier.instance 
       obj.use ::Prometheus::Middleware::Collector
       obj.use ::Prometheus::Middleware::Exporter
     end

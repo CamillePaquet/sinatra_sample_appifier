@@ -3,7 +3,7 @@
 
 describe 'Posts REST API' do
   before :all do
-    $service = RestService::new :service => Application::PPAService
+    $service = RestService::new :service => %%APPLICATION%%::%%NAMESPACE%%
     $data = { "code" => 200,
               "description" => "Successful HTTP Request",
               "data" => {

@@ -1,8 +1,8 @@
-module Application
+module %%APPLICATION%%
     module Helpers
         module Config
             def log 
-                Application::Controller.logger
+                %%APPLICATION%%::Controller.logger
             end
         end
     end

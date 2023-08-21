@@ -1,8 +1,8 @@
-module Application
+module %%APPLICATION%%
     module Helpers
         module Config
             def get_config
-                Application::Controller.configuration.settings
+                %%APPLICATION%%::Controller.configuration.settings
             end
         end
     end

@@ -6,5 +6,5 @@ Bundler.require
 
 require './app.rb'
 
-run Application::PPAService
+run %%APPLICATION%%::%%NAMESPACE%%
 

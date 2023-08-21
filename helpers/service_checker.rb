@@ -1,10 +1,10 @@
-module Application
+module %%APPLICATION%%
   module Helpers
     module ServicesCheckers
       def check_mongodb
         res = {}
         begin
-          client = Mongo::Client.new(Application::Controller.configuration.settings.mongodb.url)
+          client = Mongo::Client.new(%%APPLICATION%%::Controller.configuration.settings.mongodb.url)
           client.database_names
           res[:status] = 'OK'
         rescue Mongo::Auth::Unauthorized, Mongo::Error => e
@@ -17,7 +17,7 @@ module Application
       def check_redis
         res = {}
         begin
-          redis = Redis.new(url: Application::Controller.configuration.settings.redis.url)
+          redis = Redis.new(url: %%APPLICATION%%::Controller.configuration.settings.redis.url)
           redis.keys('*')
           res[:status] = 'OK'
         rescue Redis::CannotConnectError => e
