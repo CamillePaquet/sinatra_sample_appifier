@@ -1,0 +1,18 @@
+---
+:template:
+  :name: sinatra_sample
+  :version: 1.0
+  :authors:
+    - Camille Paquet
+  :description: a sinatra sample template
+  :dataset:
+    :appname:
+      :description: sinatra sample
+      :default: test_application
+      :format: \w+
+:actions:
+  :deploy: {}
+  :run: {}
+  :build: {}
+  :publish: {}
+  :test: {}
